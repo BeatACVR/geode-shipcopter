@@ -1,3 +1,5 @@
+# 1.0.2
+- Fix name (Blockcopter -> Shipcopter)
 # 1.0.1
 - Add cheats tag
 # 1.0.0
