@@ -8,7 +8,10 @@
 	},
 	"id": "beat.shipcopter",
 	"name": "Blockcopter",
-	"version": "v1.0.0",
+	"version": "v1.0.1",
 	"developer": "Beat",
-	"description": "The swing works more like the ship"
+	"description": "The swing works more like the ship",
+	"tags":[
+		"cheats"
+	]
 }
