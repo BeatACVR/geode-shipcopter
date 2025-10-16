@@ -6,11 +6,6 @@ using namespace geode::prelude;
 
 class $modify(PlayerObject) {
 public:
-    struct Fields {
-        bool m_isSwing;
-        bool m_isUpsideDown;
-    };
-
     // check if gd is in gameplay, runs when player starts or stops holding
 	bool integrityCheck() {
         if (!PlayLayer::get()) {
@@ -40,4 +35,5 @@ public:
         }
         return false;
     }
+
 };
