@@ -1,5 +1,5 @@
 {
-	"geode": "4.5.0",
+	"geode": "4.8.0",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074",
@@ -8,10 +8,11 @@
 	},
 	"id": "beat.shipcopter",
 	"name": "Shipcopter",
-	"version": "v1.0.3",
+	"version": "v1.0.4",
 	"developer": "Beat",
 	"description": "The swing works more like the ship",
 	"tags":[
 		"cheat"
 	]
 }
+
