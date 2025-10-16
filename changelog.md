@@ -1,3 +1,5 @@
+# 1.0.4
+- Add JITless support for iOS
 # 1.0.3
 - Add iOS support
 # 1.0.2
