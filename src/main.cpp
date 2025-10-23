@@ -1,39 +1,55 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayerObject.hpp>
-#include <Geode/modify/GJBaseGameLayer.hpp>
+#include <Geode/modify/MenuLayer.hpp>
 
 using namespace geode::prelude;
 
 class $modify(PlayerObject) {
-public:
-    // check if gd is in gameplay, runs when player starts or stops holding
-	bool integrityCheck() {
-        if (!PlayLayer::get()) {
-            if (!LevelEditorLayer::get()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     bool pushButton(PlayerButton p0) {
-        if (!integrityCheck()) return PlayerObject::pushButton(p0);		
-        if (PlayerObject::pushButton(p0) && m_isSwing) {
-            GJBaseGameLayer::get()->m_player1->flipGravity(m_isUpsideDown, true);
-            GJBaseGameLayer::get()->m_player2->flipGravity(m_isUpsideDown, true); 
-            return true;
+        if (!m_gameLayer) return PlayerObject::pushButton(p0);
+
+        bool ret = PlayerObject::pushButton(p0);
+        if (ret && m_isSwing) {
+            this->flipGravity(this->m_isUpsideDown, true);
         }
-        return false;
+
+        return ret;
     }
 
     bool releaseButton(PlayerButton p0) {
-		if (!integrityCheck()) return PlayerObject::releaseButton(p0);		
-        if (PlayerObject::releaseButton(p0) && m_isSwing) {
-            GJBaseGameLayer::get()->m_player1->flipGravity(!m_isUpsideDown, true);
-            GJBaseGameLayer::get()->m_player2->flipGravity(!m_isUpsideDown, true); 
-            return true;
-        }
-        return false;
-    }
+        if (!m_gameLayer) return PlayerObject::releaseButton(p0);
 
+        bool ret = PlayerObject::releaseButton(p0);
+        if (ret && m_isSwing) {
+            this->flipGravity(!this->m_isUpsideDown, true);
+        }
+
+        return ret;
+    }
+};
+
+// uninstall popup.
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init()) return false;
+        if (Mod::get()->getSavedValue<bool>("never-show")) return true;
+
+        auto popup = createQuickPopup(
+            "Shipcopter Mod",
+            "Shipcopter (by Beat) is no longer supported. Please use the Shipcopter hack in Eclipse Menu or Mega Hack instead. \n\nUninstall Shipcopter and restart?",
+            "Never show", "Uninstall",
+            [this](auto, bool btn2) {
+                if (btn2) {
+                    Mod::get()->uninstall(true);
+                    game::restart();
+
+                } else {
+                    Mod::get()->setSavedValue<bool>("never-show", true);
+                }
+            }, false
+        );
+        popup->m_scene = this;
+        popup->show();
+        return true;
+    }
 };

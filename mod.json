@@ -1,5 +1,5 @@
 {
-	"geode": "4.8.0",
+	"geode": "4.9.0",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074",
@@ -8,11 +8,21 @@
 	},
 	"id": "beat.shipcopter",
 	"name": "Shipcopter",
-	"version": "v1.0.4",
+	"version": "v1.0.5",
 	"developer": "Beat",
 	"description": "The swing works more like the ship",
 	"tags":[
 		"cheat"
-	]
+	],
+	"incompatibilities": {
+		"absolllute.megahack": {
+			"importance": "conflicting",
+			"version": ">v8.0.6-alpha.1"
+		},
+		"eclipse.eclipse-menu": {
+			"importance": "conflicting",
+			"version": ">v1.4.0"
+		}
+	}
 }
 
